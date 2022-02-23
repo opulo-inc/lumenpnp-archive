@@ -18,7 +18,7 @@ The LumenPnP is an open source Pick and Place project led by [Opulo](https://www
 
 The LumenPnP is capable of placing parts as small as 0402, with support for down to 0603. It is currently set up to use strip feeders, but development around active, powered feeders is ongoing.
 
-It is completely open source and hackable. The main controller has three AUX ports, allowing anyone to add on peripherals or communicate with other machines.
+It is completely open source and hackable. The main controller has three AUX ports, allowing anyone to add on peripherals or communicate with other machines. 
 
 {{% alert color="danger" title="WARNING" %}}
 This documentation corresponds with a specific machine Build Number. If you're building from a kit, check the included pamphlet for your Build Number. If your build number is `v2.0.X`, the `v2.0` dictates the hardware you've received. The `X` dictates any software or documentation fixes. **Use the build number with the highest number in the X position that you see in the dropdown**. This means you'll be using the most up to date docs and software for your machine's hardware. For example, if your build number is `v2.0.X`, and you see `v2.0.0`, `v2.0.1`, and `v2.0.2`, select `v2.0.2`. **Check the drop down in the upper right to select your Build Number.**
