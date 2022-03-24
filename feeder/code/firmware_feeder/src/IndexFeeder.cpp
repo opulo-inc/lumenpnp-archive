@@ -2,15 +2,15 @@
 #include <Arduino.h>
 
 #define TENTH_MM_PER_PIP 40
-#define DELAY_FORWARD_DRIVE 10
+#define DELAY_FORWARD_DRIVE 15
 #define DELAY_BACKWARD_DRIVE 10
 #define DELAY_PAUSE 50
 #define DRIVE_LEVEL 200
 
-#define THRESHOLD_1_TIMEOUT     400
-#define THRESHOLD_2_TIMEOUT     400
-#define THRESHOLD_3_TIMEOUT     400
-#define TENSION_TIMEOUT         400
+#define THRESHOLD_1_TIMEOUT     4000
+#define THRESHOLD_2_TIMEOUT     4000
+#define THRESHOLD_3_TIMEOUT     4000
+#define TENSION_TIMEOUT         2000
 
 // Unit Tests Fail Because This Isn't Defined In ArduinoFake for some reason
 #ifndef INPUT_ANALOG
@@ -27,9 +27,9 @@ typedef struct {
 } threshold_t;
 
 static const threshold_t forward[] = {
-    {200, std::less<int>(), THRESHOLD_1_TIMEOUT, DRIVE_LEVEL, DELAY_FORWARD_DRIVE, DELAY_PAUSE},
-    {200, std::greater<int>(), THRESHOLD_2_TIMEOUT, DRIVE_LEVEL, DELAY_FORWARD_DRIVE, DELAY_PAUSE},
-    {500, std::less<int>(), THRESHOLD_3_TIMEOUT, DRIVE_LEVEL, DELAY_FORWARD_DRIVE, DELAY_PAUSE}
+    {825, std::less<int>(), THRESHOLD_1_TIMEOUT, DRIVE_LEVEL, DELAY_FORWARD_DRIVE, DELAY_PAUSE},
+    {825, std::greater<int>(), THRESHOLD_2_TIMEOUT, DRIVE_LEVEL, DELAY_FORWARD_DRIVE, DELAY_PAUSE},
+    {750, std::less<int>(), THRESHOLD_3_TIMEOUT, DRIVE_LEVEL, DELAY_FORWARD_DRIVE, DELAY_PAUSE}
 };
 
 
@@ -39,24 +39,27 @@ static const threshold_t backward[] = {
     {250, std::less<int>(), THRESHOLD_3_TIMEOUT, DRIVE_LEVEL, DELAY_FORWARD_DRIVE, DELAY_PAUSE}
 };
 
-IndexFeeder::IndexFeeder(uint8_t opto_signal_pin, uint8_t film_tension_pin, uint8_t drive1_pin, uint8_t drive2_pin, uint8_t peel1_pin, uint8_t peel2_pin) :
+IndexFeeder::IndexFeeder(uint8_t opto_signal_pin, uint8_t film_tension_pin, uint8_t drive1_pin, uint8_t drive2_pin, uint8_t peel1_pin, uint8_t peel2_pin, uint8_t led1_pin) :
     _opto_signal_pin(opto_signal_pin),
     _film_tension_pin(film_tension_pin),
     _drive1_pin(drive1_pin),
     _drive2_pin(drive2_pin),
     _peel1_pin(peel1_pin),
-    _peel2_pin(peel2_pin) {
+    _peel2_pin(peel2_pin),
+    _led1_pin(led1_pin) {
     init();
 }
 
 bool IndexFeeder::init() {
-    pinMode(_film_tension_pin, INPUT_ANALOG);
+    pinMode(_film_tension_pin, INPUT);
     pinMode(_opto_signal_pin, INPUT_ANALOG);
 
     pinMode(_drive1_pin, OUTPUT);
     pinMode(_drive2_pin, OUTPUT);
     pinMode(_peel1_pin, OUTPUT);
     pinMode(_peel2_pin, OUTPUT);
+
+    pinMode(_led1_pin, OUTPUT);
 
     return true;
 }
@@ -86,7 +89,7 @@ bool IndexFeeder::moveInternal(int threshold, std::function<bool(int, int)> comp
 
     start_millis = millis();
     current_millis = start_millis;
-    while(comparison(analogRead(_opto_signal_pin), threshold) && (current_millis - start_millis) < timeout){
+    while((analogRead(_opto_signal_pin) > threshold) && (current_millis - start_millis) < timeout){
         analogWrite(drive_pin, drive_level);
         delay(drive_millis);
         analogWrite(drive_pin, 0);
@@ -94,7 +97,9 @@ bool IndexFeeder::moveInternal(int threshold, std::function<bool(int, int)> comp
         current_millis = millis();
     }
 
-    return ((current_millis - start_millis) < timeout);
+    //disabling returning false so that i can test motor functionality without everything working perfectly
+    //return ((current_millis - start_millis) < timeout);
+    return true;
 }
 
 bool IndexFeeder::tension(uint32_t timeout) {
@@ -102,11 +107,12 @@ bool IndexFeeder::tension(uint32_t timeout) {
 
     start_millis = millis();
     current_millis = start_millis;      
-    while(analogRead(_film_tension_pin) > 500 && (current_millis - start_millis) < timeout){//if film tension switch not clicked
+    while(digitalRead(_film_tension_pin) == HIGH && ((current_millis - start_millis) < timeout)){//if film tension switch not clicked
         //then spin motor to wind film
-        analogWrite(_peel2_pin, 250);
+        analogWrite(_peel2_pin, 100);
         current_millis = millis();
     }
+
     stop();
 
     if ((current_millis - start_millis) >= timeout) {
@@ -119,6 +125,7 @@ bool IndexFeeder::tension(uint32_t timeout) {
 bool IndexFeeder::moveForward() {
     // First, ensure everything is stopped
     stop();
+    analogWrite(_peel2_pin, 150);
 
     // Next Work Through Each Threshold Specified
     for (size_t idx = 0; idx < sizeof(forward) / sizeof(threshold_t); idx++) {
@@ -128,7 +135,7 @@ bool IndexFeeder::moveForward() {
             return false;
         }
     }
-
+    analogWrite(_peel2_pin, 0);
     // Tension the film peeler
     return tension(TENSION_TIMEOUT);
 }
@@ -138,9 +145,9 @@ bool IndexFeeder::moveBackward() {
     stop();
 
     // Next, unspool some film to give the tape slack. imprecise amount because we retention later
-    analogWrite(_peel1_pin, 100);
+    analogWrite(_peel2_pin, 100);
     delay(400);
-    analogWrite(_peel1_pin, 0);
+    analogWrite(_peel2_pin, 0);
 
     // Next, work through each threshold specified
     for (size_t idx = 0; idx < sizeof(backward) / sizeof(threshold_t); idx++) {

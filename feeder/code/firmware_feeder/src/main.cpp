@@ -24,22 +24,24 @@ When the feeder receives a signal from the host, it indexes a certain number of 
   #include <ArduinoUniqueID.h>
 #endif // UNIT_TEST
 
+#ifdef UNIT_TEST
+StreamFake ser();
+#else
+HardwareSerial ser(PA10, PA9);
+#endif // ARDUINO
+
 #include <IndexFeeder.h>
 #include <IndexFeederProtocol.h>
 #include <IndexNetworkLayer.h>
 
-#define BAUD_RATE 9600
+#define BAUD_RATE 57600
 
 //
 //global variables
 //
 byte addr = 0;
 
-#ifdef UNIT_TEST
-StreamFake ser();
-#else
-HardwareSerial ser(PA10, PA9);
-#endif // ARDUINO
+
 
 OneWire oneWire(ONE_WIRE);
 DS2431 eeprom(oneWire);
@@ -170,6 +172,7 @@ void setup() {
   pinMode(LED5, OUTPUT);
   pinMode(SW1, INPUT_PULLUP);
   pinMode(SW2, INPUT_PULLUP);
+  pinMode(FILM_TENSION, INPUT);
   
   //init led blink
   for(int i = 0;i <= 5;i++){
@@ -184,9 +187,10 @@ void setup() {
     delay(200);
   }
 
+
   //setting initial pin states
   digitalWrite(DE, LOW);
-  digitalWrite(_RE, HIGH);
+  digitalWrite(_RE, LOW);
   ALL_LEDS_OFF();
 
   // Reading Feeder Floor Address
@@ -206,9 +210,10 @@ void setup() {
   ser.begin(BAUD_RATE);
 
   // Setup Feeder
-  feeder = new IndexFeeder(OPTO_SIG, FILM_TENSION, DRIVE1, DRIVE2, PEEL1, PEEL2);
+  feeder = new IndexFeeder(OPTO_SIG, FILM_TENSION, DRIVE1, DRIVE2, PEEL1, PEEL2, LED1);
   protocol = new IndexFeederProtocol(feeder, UniqueID, UniqueIDsize);
   network = new IndexNetworkLayer(&ser, DE, _RE, addr, protocol);
+
 }
 
 //------
@@ -219,6 +224,9 @@ void loop() {
 
   // Checking SW1 status to go forward, or initiate settings mode
   if(!digitalRead(SW1)){
+    digitalWrite(LED1, LOW);
+    delay(10);
+    digitalWrite(LED1, HIGH);
     delay(LONG_PRESS_DELAY);
 
     if(!digitalRead(SW1)){
@@ -272,8 +280,13 @@ void loop() {
       
     }
     else{
-      feeder->feedDistance(40, false);
-      //index(1, false);
+      //feeder->feedDistance(40, false);
+
+      uint8_t response[2];
+      response[0] = network->getLocalAddress();
+      response[1] = 0xF1;
+
+      network->transmitPacket(0x00, response, 2);
     }  
   }
 

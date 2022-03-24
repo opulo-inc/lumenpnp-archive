@@ -7,7 +7,7 @@
 class IndexFeeder : public Feeder {
 
     public:
-        IndexFeeder(uint8_t opto_signal_pin, uint8_t film_tension_pin, uint8_t drive1_pin, uint8_t drive2_pin, uint8_t peel1_pin, uint8_t peel2_pin);
+        IndexFeeder(uint8_t opto_signal_pin, uint8_t film_tension_pin, uint8_t drive1_pin, uint8_t drive2_pin, uint8_t peel1_pin, uint8_t peel2_pin, uint8_t led1_pin);
         bool init() override;
         Feeder::FeedResult feedDistance(uint8_t tenths_mm, bool forward) override;
         
@@ -20,6 +20,8 @@ class IndexFeeder : public Feeder {
 
         uint8_t _peel1_pin;
         uint8_t _peel2_pin;
+
+        uint8_t _led1_pin;
 
         bool moveForward();
         bool moveBackward();
