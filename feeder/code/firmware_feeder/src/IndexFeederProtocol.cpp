@@ -1,5 +1,6 @@
 #include "IndexFeederProtocol.h"
 #include "IndexNetworkLayer.h"
+#include <HardwareSerial.h>
 
 #define MAX_PROTOCOL_VERSION 1
 
@@ -54,7 +55,7 @@ static const uint8_t zero_uuid[UUID_LENGTH] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 
 #define UNINITIALIZED_FEEDER_RESPONSE_LENGTH (2 + UUID_LENGTH)
 
-IndexFeederProtocol::IndexFeederProtocol(Feeder *feeder, const uint8_t *uuid, size_t uuid_length) : _feeder(feeder), _initialized(false) {
+IndexFeederProtocol::IndexFeederProtocol(Feeder *feeder, const uint8_t *uuid, size_t uuid_length, HardwareSerial *ser) : _feeder(feeder), _initialized(false), _ser(ser) {
     memset(_uuid, 0, UUID_LENGTH);
     memcpy(_uuid, uuid, (uuid_length < UUID_LENGTH) ? uuid_length : UUID_LENGTH);
 }
@@ -210,7 +211,7 @@ void IndexFeederProtocol::move(IndexNetworkLayer *instance, uint8_t distance, bo
         return;
     }
 
-    Feeder::FeedResult result = _feeder->feedDistance(distance, forward);
+    Feeder::FeedResult result = _feeder->feedDistance(distance, forward, _ser);
 
     switch (result)
     {

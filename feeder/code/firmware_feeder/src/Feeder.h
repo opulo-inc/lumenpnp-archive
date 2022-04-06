@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <HardwareSerial.h>
 
 class Feeder {
 
@@ -16,7 +17,7 @@ class Feeder {
         };
 
         virtual bool init() = 0;
-        virtual FeedResult feedDistance(uint8_t tenths_mm, bool forward) = 0;
+        virtual FeedResult feedDistance(uint8_t tenths_mm, bool forward, HardwareSerial *ser) = 0;
 
 };
 

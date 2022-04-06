@@ -87,11 +87,21 @@ byte write_floor_addr(){
 
   byte current_selection = addr;
 
-  ALL_LEDS_OFF();
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, LOW);
+  digitalWrite(LED3, LOW);
+  digitalWrite(LED4, LOW);
+  digitalWrite(LED5, LOW);
   while(!digitalRead(SW1) || !digitalRead(SW2)){
     //do nothing
   }
-  ALL_LEDS_ON();
+  digitalWrite(LED1, HIGH);
+  digitalWrite(LED2, HIGH);
+  digitalWrite(LED3, HIGH);
+  digitalWrite(LED4, HIGH);
+  digitalWrite(LED5, HIGH);
+
+  delay(5); //bit of debounce time
 
   while(true){
     //we stay in here as long as both buttons aren't pressed
@@ -119,10 +129,12 @@ byte write_floor_addr(){
     byte_to_light(current_selection);
   }
 
-  byte_to_light(0x00);
+  //byte_to_light(0x00);
 
   newData[0] = current_selection;
   word address = 0;
+
+  oneWire.reset();
   if (eeprom.write(address, newData, sizeof(newData))){
     addr = current_selection;
 
@@ -147,7 +159,23 @@ byte write_floor_addr(){
   }
   else
   {
-    return 0x00;
+    addr = current_selection;
+
+    // If the network is configured, update the local address
+    // to the newly selected address.
+    if (network != NULL) {
+      network->setLocalAddress(addr);
+    }
+
+    ALL_LEDS_OFF();
+    ALL_LEDS_ON();
+    delay(50);
+    ALL_LEDS_OFF();
+    delay(50);
+    ALL_LEDS_ON();
+    delay(50);
+    ALL_LEDS_OFF();
+    return 0x05;
   }
 }
 
@@ -193,6 +221,45 @@ void setup() {
   digitalWrite(_RE, LOW);
   ALL_LEDS_OFF();
 
+  //tryna barf out all eeprom stuff
+  byte serialNb[8];
+  oneWire.target_search(DS2431::ONE_WIRE_FAMILY_CODE);
+  if (!oneWire.search(serialNb))
+  {
+    Serial.println("No DS2431 found on the 1-Wire bus.");
+    return;
+  }
+
+  // Check serial number CRC
+  if (oneWire.crc8(serialNb, 7) != serialNb[7])
+  {
+    Serial.println("A DS2431 was found but the serial number CRC is invalid.");
+    return;
+  }
+
+  Serial.print("DS2431 found with serial number : ");
+  Serial.print(serialNb[0]);
+  Serial.println("");
+
+  // Initialize DS2431 object
+  eeprom.begin(serialNb);
+
+  // Read all memory content
+  byte data[128];
+  eeprom.read(0, data, sizeof(data));
+
+  Serial.println("Memory contents : ");
+  Serial.println(data[0]);
+  Serial.println("");
+
+
+
+
+
+
+
+
+
   // Reading Feeder Floor Address
   byte floor_addr = read_floor_addr();
 
@@ -211,7 +278,7 @@ void setup() {
 
   // Setup Feeder
   feeder = new IndexFeeder(OPTO_SIG, FILM_TENSION, DRIVE1, DRIVE2, PEEL1, PEEL2, LED1);
-  protocol = new IndexFeederProtocol(feeder, UniqueID, UniqueIDsize);
+  protocol = new IndexFeederProtocol(feeder, UniqueID, UniqueIDsize, &ser);
   network = new IndexNetworkLayer(&ser, DE, _RE, addr, protocol);
 
 }
@@ -224,9 +291,7 @@ void loop() {
 
   // Checking SW1 status to go forward, or initiate settings mode
   if(!digitalRead(SW1)){
-    digitalWrite(LED1, LOW);
-    delay(10);
-    digitalWrite(LED1, HIGH);
+  
     delay(LONG_PRESS_DELAY);
 
     if(!digitalRead(SW1)){
@@ -250,7 +315,7 @@ void loop() {
       
     }
     else{
-      feeder->feedDistance(40, true);
+      feeder->feedDistance(40, true, &ser);
       //index(1, true);
     }
   }

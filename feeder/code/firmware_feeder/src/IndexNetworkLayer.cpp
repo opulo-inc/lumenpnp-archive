@@ -8,7 +8,7 @@
 
 #define INDEX_PROTOCOL_DEFAULT_TIMEOUT_MS 100
 #define INDEX_INCOMING_BUFFER_SIZE 16
-#define RS485_CONTROL_DELAY 5
+#define RS485_CONTROL_DELAY 20
 
 IndexNetworkLayer::IndexNetworkLayer(Stream* stream, uint8_t address, IndexPacketHandler* handler) :  _stream(stream), _rs485_enable(false), _local_address(address), _handler(handler), _timeout_period(INDEX_PROTOCOL_DEFAULT_TIMEOUT_MS) {
     reset();

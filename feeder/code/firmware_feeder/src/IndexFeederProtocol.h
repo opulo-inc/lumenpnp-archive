@@ -3,19 +3,21 @@
 
 #include "IndexPacketHandler.h"
 #include "Feeder.h"
+#include <HardwareSerial.h>
 
 #define UUID_LENGTH 12
 
 class IndexFeederProtocol : public IndexPacketHandler {
 
     public:
-        IndexFeederProtocol(Feeder *feeder, const uint8_t *uuid, size_t uuid_length);
+        IndexFeederProtocol(Feeder *feeder, const uint8_t *uuid, size_t uuid_length, HardwareSerial *ser);
         void handle(IndexNetworkLayer *instance, uint8_t *buffer, size_t buffer_length) override;
         bool isInitialized();
     
     private:
 
         Feeder *_feeder;
+        HardwareSerial *_ser;
         uint8_t _uuid[UUID_LENGTH];
         bool _initialized;
 
