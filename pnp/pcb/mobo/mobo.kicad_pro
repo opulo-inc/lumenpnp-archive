@@ -39,9 +39,9 @@
         },
         "silk_line_width": 0.12,
         "silk_text_italic": false,
-        "silk_text_size_h": 1.0,
-        "silk_text_size_v": 1.0,
-        "silk_text_thickness": 0.15,
+        "silk_text_size_h": 0.6,
+        "silk_text_size_v": 0.6,
+        "silk_text_thickness": 0.09999999999999999,
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": false,
@@ -447,10 +447,6 @@
       "Mosfet 2"
     ],
     [
-      "00000000-0000-0000-0000-00005eb0c248",
-      "Motor control"
-    ],
-    [
       "826bfcf6-94c7-4ddc-9a06-d8191898ae0c",
       "Mosfet 3"
     ],
@@ -475,20 +471,20 @@
       "Power"
     ],
     [
-      "00000000-0000-0000-0000-0000602a1f7c",
-      "Motor X"
+      "00000000-0000-0000-0000-00005eb0c248",
+      "Motor control"
+    ],
+    [
+      "e879fa5c-c0d9-49d4-804e-02baaa1a0697",
+      "Aux header 2"
     ],
     [
       "10877033-c909-4797-9742-12208aa04a01",
       "Motor Z"
     ],
     [
-      "cdb39402-8548-471b-84fd-7e7ff4d5b5c8",
-      "Aux header 3"
-    ],
-    [
-      "00000000-0000-0000-0000-00006057b851",
-      "Motor AUX"
+      "00000000-0000-0000-0000-0000602a1f7c",
+      "Motor X"
     ],
     [
       "30ed8d8e-5be3-4e10-a129-e64c0ee79386",
@@ -497,6 +493,10 @@
     [
       "9e697e46-d502-48a5-8498-4118d1f6c92d",
       "Motor Y"
+    ],
+    [
+      "00000000-0000-0000-0000-00006057b851",
+      "Motor AUX"
     ],
     [
       "00000000-0000-0000-0000-00005eb0c5a0",
@@ -511,10 +511,6 @@
       "Aux header 1"
     ],
     [
-      "e879fa5c-c0d9-49d4-804e-02baaa1a0697",
-      "Aux header 2"
-    ],
-    [
       "fe39a0b0-3291-4d66-a2da-0a15cb6f7039",
       "Mosfets"
     ],
@@ -527,24 +523,20 @@
       "Servos"
     ],
     [
-      "559adffc-c7f8-4c0c-9367-7aff32990319",
-      "Lighting"
-    ],
-    [
       "02705e7d-b250-4955-94ce-1e1db6770300",
       "Limit switches"
+    ],
+    [
+      "559adffc-c7f8-4c0c-9367-7aff32990319",
+      "Lighting"
     ],
     [
       "e42a41b2-396d-4f02-8c5f-05a8dce2e3c6",
       "Miscellaneous"
     ],
     [
-      "4feb0f67-3b38-4760-b891-0aa4ecb07913",
-      "Vacuum sensor 1"
-    ],
-    [
-      "3a180789-0218-487c-9368-75d2a0860ff0",
-      "Vacuum sensor 2"
+      "cdb39402-8548-471b-84fd-7e7ff4d5b5c8",
+      "Aux header 3"
     ]
   ],
   "text_variables": {}

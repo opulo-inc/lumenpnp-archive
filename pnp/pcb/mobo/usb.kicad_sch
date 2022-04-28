@@ -5,9 +5,10 @@
   (paper "A4")
 
   (title_block
-    (title "Index Mobo")
+    (title "LumenPnP Motherboard")
     (date "2022-03-29")
     (rev "003")
+    (company "Opulo")
   )
 
   (lib_symbols
