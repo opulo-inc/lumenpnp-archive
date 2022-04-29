@@ -1,6 +1,6 @@
 (footprint "XGZP6857D" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
-  (tedit 6268608A)
+  (tedit 626BF9EA)
   (attr through_hole)
   (fp_text reference "REF**" (at 0 0.25 unlocked) (layer "F.SilkS")
     (effects (font (size 1 1) (thickness 0.15)))
@@ -24,4 +24,9 @@
   (pad "4" thru_hole circle (at 5.4 2.54) (size 1 1) (drill 0.56) (layers *.Cu *.Mask) (tstamp 5858287d-fda1-4244-9df1-d13393f27f3f))
   (pad "5" thru_hole circle (at 5.4 0) (size 1 1) (drill 0.56) (layers *.Cu *.Mask) (tstamp 65ad3605-cc03-487e-93d6-44017da20972))
   (pad "6" thru_hole circle (at 5.4 -2.54) (size 1 1) (drill 0.56) (layers *.Cu *.Mask) (tstamp 975bf28e-464c-4451-a6eb-252efd602edb))
+  (model "/Users/stephen/index/lib/kicad/index.3dshapes/XGZP6857D.step"
+    (offset (xyz 0 0 3.2))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
 )

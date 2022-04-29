@@ -1300,8 +1300,8 @@
     (path "/fe39a0b0-3291-4d66-a2da-0a15cb6f7039/0bafd6d7-2261-4ac3-80de-63f88fd3b390/85aa2b94-b437-4228-a1f3-10eb7a30354b"
       (reference "#PWR0104") (unit 1) (value "GND") (footprint "")
     )
-    (path "/00000000-0000-0000-0000-00005eb0c5a0/fc3014ac-b234-427d-b6ee-7e551e20c3dc"
-      (reference "#PWR0105") (unit 1) (value "+5VP") (footprint "")
+    (path "/00000000-0000-0000-0000-00005eb0c5a0/f237a98a-cf95-49fd-92f9-e9276466f779"
+      (reference "#PWR0105") (unit 1) (value "+3V3") (footprint "")
     )
     (path "/fe39a0b0-3291-4d66-a2da-0a15cb6f7039/e6a63a2a-ad69-49c8-9eeb-a047f08d50d8/85aa2b94-b437-4228-a1f3-10eb7a30354b"
       (reference "#PWR0106") (unit 1) (value "GND") (footprint "")
@@ -1702,8 +1702,8 @@
     (path "/00000000-0000-0000-0000-00005eb0c492/cdb39402-8548-471b-84fd-7e7ff4d5b5c8/5c7c5696-bf6c-4ecb-a0ed-bd883e069ac9"
       (reference "#PWR0238") (unit 1) (value "GND") (footprint "")
     )
-    (path "/00000000-0000-0000-0000-00005eb0c5a0/ffd05182-2ca9-492d-8eb4-79722f50c5e8"
-      (reference "#PWR0239") (unit 1) (value "+5VP") (footprint "")
+    (path "/00000000-0000-0000-0000-00005eb0c5a0/961d3cf5-7007-472a-93c7-cf027d4daea8"
+      (reference "#PWR0239") (unit 1) (value "+3V3") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00005eb0c5a0/826bd810-e821-4e4e-8681-315bc2266bcc"
       (reference "#PWR0240") (unit 1) (value "+3V3") (footprint "")
@@ -1973,7 +1973,7 @@
       (reference "J20") (unit 1) (value "AUX") (footprint "Connector_IDC:IDC-Header_2x06_P2.54mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-00005eb0c248/befebf8a-3d46-4bcf-a89d-dc4a8a7bfe3b/fe5a7192-f070-4900-8e76-fe4ec1b76215"
-      (reference "J21") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+      (reference "J21") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical")
     )
     (path "/fe39a0b0-3291-4d66-a2da-0a15cb6f7039/e6a63a2a-ad69-49c8-9eeb-a047f08d50d8/00000000-0000-0000-0000-00006033432c"
       (reference "J22") (unit 1) (value "Mosfet") (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
@@ -1988,19 +1988,19 @@
       (reference "J25") (unit 1) (value "Mosfet") (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-00005eb0c248/10877033-c909-4797-9742-12208aa04a01/fe5a7192-f070-4900-8e76-fe4ec1b76215"
-      (reference "J26") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+      (reference "J26") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-00005eb0c248/00000000-0000-0000-0000-0000602a1f7c/fe5a7192-f070-4900-8e76-fe4ec1b76215"
-      (reference "J27") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+      (reference "J27") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-00005eb0c248/30ed8d8e-5be3-4e10-a129-e64c0ee79386/fe5a7192-f070-4900-8e76-fe4ec1b76215"
-      (reference "J28") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+      (reference "J28") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-00005eb0c248/9e697e46-d502-48a5-8498-4118d1f6c92d/2c430271-6bce-4399-bdaa-3b266ce6fdae"
-      (reference "J29") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+      (reference "J29") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-00005eb0c248/00000000-0000-0000-0000-00006057b851/2c430271-6bce-4399-bdaa-3b266ce6fdae"
-      (reference "J30") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+      (reference "J30") (unit 1) (value "TMC_PIN_HEADER") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-00005eb0c248/00000000-0000-0000-0000-0000602a1f7c/aa5c0597-65d4-4e24-bede-dfc71c7f27db"
       (reference "JP1") (unit 1) (value "CFG0") (footprint "Jumper:SolderJumper-3_P1.3mm_Open_RoundedPad1.0x1.5mm")
