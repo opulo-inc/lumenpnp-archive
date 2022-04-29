@@ -360,6 +360,11 @@
     (uuid e422e738-11ab-4e51-a526-f1f69a4c1c66)
   )
 
+  (no_connect (at 201.93 113.03) (uuid e7c90dee-db86-4440-916b-8128ba82147b))
+  (no_connect (at 201.93 115.57) (uuid e7c90dee-db86-4440-916b-8128ba82147b))
+  (no_connect (at 201.93 120.65) (uuid e7c90dee-db86-4440-916b-8128ba82147b))
+  (no_connect (at 201.93 123.19) (uuid e7c90dee-db86-4440-916b-8128ba82147b))
+
   (wire (pts (xy 167.64 77.47) (xy 167.64 81.28))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 0512131d-3684-4b0b-912d-ff5dcb726b11)

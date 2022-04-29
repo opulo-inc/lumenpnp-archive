@@ -825,6 +825,7 @@
     )
   )
 
+
   (junction (at 119.38 127) (diameter 0) (color 0 0 0 0)
     (uuid 2c2994e5-59d1-4212-a2bd-a89f47808d20)
   )
@@ -837,6 +838,8 @@
   (junction (at 210.82 90.17) (diameter 0) (color 0 0 0 0)
     (uuid fbda7b77-d845-4a4e-9d28-9ef82e03058c)
   )
+
+  (no_connect (at 199.39 133.35) (uuid f02cbcc7-7c79-4c46-a462-5c6d2161b046))
 
   (polyline (pts (xy 83.82 77.47) (xy 83.82 134.62))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -1116,10 +1119,6 @@
   (hierarchical_label "DIAG" (shape input) (at 199.39 135.89 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 91b2a1a7-48f1-467b-92f6-19876be0d06d)
-  )
-  (hierarchical_label "INDEX" (shape input) (at 199.39 133.35 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 947540dc-e4b6-489b-b765-b092a22f9570)
   )
   (hierarchical_label "EN" (shape input) (at 106.68 102.87 180)
     (effects (font (size 1.27 1.27)) (justify right))
