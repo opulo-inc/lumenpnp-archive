@@ -83,7 +83,7 @@ jobs:
         cd /home/runner/work/index/index/.github/workflows/scripts/csm-export
         pwd
         ls -al
-        zip -9 -j -u ~/LumenPnP-DXFs.zip *.dxf
+# zip -9 -j -u ~/LumenPnP-DXFs.zip *.dxf
         ls -al
 
 
@@ -100,7 +100,7 @@ jobs:
       with:
         name: LumenPnP-DXFs
         path: ~/LumenPnP-DXFs.zip
-        if-no-files-found: error
+        if-no-files-found: warn
         retention-days: 60
 
     - name: Upload STLs and DXFs Release
