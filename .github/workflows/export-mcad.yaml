@@ -72,7 +72,7 @@ jobs:
         pwd
         ls -al
         zip -9 -j -u ~/LumenPnP-DXFs-${{ github.event.release.tag_name }}.zip *.dxf
-        
+
     - name: Compress STL and DXF files for Artifacts
       run: |
         cd .github/workflows/scripts/stl-export
@@ -82,8 +82,6 @@ jobs:
         ls -al
         cd /home/runner/work/index/index/.github/workflows/scripts/csm-export
         pwd
-        ls -al
-# zip -9 -j -u ~/LumenPnP-DXFs.zip *.dxf
         ls -al
 
 
